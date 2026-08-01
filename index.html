@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&family=JetBrains+Mono:wght@500;600&display=swap&subset=latin,latin-ext" rel="stylesheet"></link>
+  <style>
+    body { margin: 0; }
+    h1, h2, h3 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    a { color: inherit; }
+    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+<nav style="{{ navStyle }}">
+  <a href="#hero" style="{{ navWordmarkLinkStyle }}"><span style="{{ wordmarkStyle }}">IAD <span style="{{ wordmarkAccentStyle }}">40+</span></span></a>
+  <div style="{{ navLinksDesktopStyle }}">
+    <a href="#sobre" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">Sobre</a>
+    <a href="#modulos" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">Módulos</a>
+    <a href="#garantia" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">Garantia</a>
+    <a href="#faq" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">FAQ</a>
+    <a href="{{ content.offer.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ navCtaStyle }}" style-hover="{{ navCtaHoverStyle }}">Começar agora</a>
+  </div>
+  <button type="button" aria-label="Abrir menu" aria-expanded="{{ navOpenAttr }}" onClick="{{ toggleNav }}" style="{{ navToggleStyle }}">
+    <span style="{{ navToggleBarStyle }}"></span>
+    <span style="{{ navToggleBarStyle }}"></span>
+    <span style="{{ navToggleBarStyle }}"></span>
+  </button>
+</nav>
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ navMobilePanelStyle }}">
+    <a href="#sobre" onClick="{{ closeNav }}" style="{{ navMobileLinkStyle }}">Sobre</a>
+    <a href="#modulos" onClick="{{ closeNav }}" style="{{ navMobileLinkStyle }}">Módulos</a>
+    <a href="#garantia" onClick="{{ closeNav }}" style="{{ navMobileLinkStyle }}">Garantia</a>
+    <a href="#faq" onClick="{{ closeNav }}" style="{{ navMobileLinkStyle }}">FAQ</a>
+    <a href="{{ content.offer.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ navMobileCtaStyle }}">Começar agora</a>
+  </div>
+</sc-if>
+
+<div id="hero" style="{{ heroSectionStyle }}">
+  <img src="./assets/hero-man.png" alt="Empreendedor 40+ usando o celular para criar conteúdo com IA" style="{{ heroBgImgStyle }}"></img>
+  <div style="{{ heroScrimStyle }}"></div>
+  <div style="{{ heroContentStyle }}">
+    <div style="{{ gcBarStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>IA descomplicada 40+</div>
+    <h1 style="{{ headlineStyle }}">{{ content.hero.headlinePart1 }} {{ content.hero.headlinePart2 }}</h1>
+    <p style="{{ subheadStyle }}">{{ content.hero.subheadline }}</p>
+    <div style="{{ ctaWrapStyle }}">
+      <a href="{{ content.hero.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ ctaButtonStyle }}" style-hover="{{ ctaButtonHoverStyle }}" style-focus="{{ ctaButtonFocusStyle }}">{{ content.hero.ctaLabel }}</a>
+      <p style="{{ ctaSupportStyle }}">{{ content.hero.ctaSupport }}</p>
+    </div>
+  </div>
+</div>
+
+<div style="{{ sectionA }}">
+  <div style="{{ problemContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numProblem }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.problem.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.problem.title }}</h2>
+    <div style="{{ bulletListStyle }}">
+      <sc-for list="{{ content.problem.bullets }}" as="b" hint-placeholder-count="4">
+        <div style="{{ bulletRowStyle }}">
+          <span style="{{ dashDotStyle }}"></span>
+          <p style="{{ bulletTextStyle }}">{{ b }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <div style="{{ turnWrapStyle }}">
+      <p style="{{ turnTextStyle }}">{{ content.problem.turn }}</p>
+    </div>
+  </div>
+</div>
+
+<div id="sobre" style="{{ sectionB }}">
+  <div style="{{ transformationContainer }}">
+    <div style="{{ sideBySideGrid }}">
+      <div style="{{ photoFramePortraitStyle }}">
+        <img src="./assets/joao-blazer.jpeg" alt="João Almeida, jornalista, com notebook" style="{{ photoImgStyle }}" style-hover="{{ photoImgHoverStyle }}"></img>
+      </div>
+      <div style="{{ textColStyle }}">
+        <span style="{{ numeralLightStyle }}">{{ numTransformation }}</span>
+        <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.transformation.eyebrow }}</div>
+        <sc-for list="{{ content.transformation.paragraphs }}" as="p" hint-placeholder-count="4">
+          <p style="{{ bodyTextStyle }}">{{ p }}</p>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="{{ sectionA }}" ref="{{ instructorRef }}">
+  <div style="{{ instructorContainer }}">
+    <div style="{{ instructorGrid }}">
+      <div style="{{ textColStyle }}">
+        <span style="{{ numeralLightStyle }}">{{ numInstructor }}</span>
+        <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.instructor.eyebrow }}</div>
+        <h2 style="{{ titleStyle }}">{{ content.instructor.title }}</h2>
+        <sc-for list="{{ content.instructor.paragraphs }}" as="p" hint-placeholder-count="4">
+          <p style="{{ bodyTextStyle }}">{{ p }}</p>
+        </sc-for>
+        <div style="{{ statsRowStyle }}">
+          <sc-for list="{{ instructorStats }}" as="s" hint-placeholder-count="3">
+            <div style="{{ statBlockStyle }}">
+              <div style="{{ statNumberStyle }}">{{ s.display }}</div>
+              <div style="{{ statLabelStyle }}">{{ s.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="{{ networksStyle }}">{{ content.instructor.networks }}</p>
+        <p style="{{ signatureStyle }}">{{ content.instructor.signature }}</p>
+      </div>
+      <div style="{{ photoFramePortraitStyle }}">
+        <img src="./assets/joao-standing.jpeg" alt="João Almeida com café" style="{{ photoImgStyle }}" style-hover="{{ photoImgHoverStyle }}"></img>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="{{ darkSectionStyle }}">
+  <div style="{{ darkGlowStyle }}"></div>
+  <div style="{{ promiseContainer }}">
+    <span style="{{ numeralDarkStyle }}">{{ numPromise }}</span>
+    <div style="{{ eyebrowDarkStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.promise.eyebrow }}</div>
+    <h2 style="{{ titleDarkStyle }}">{{ content.promise.title }}</h2>
+    <div style="{{ bulletListStyle }}">
+      <sc-for list="{{ content.promise.bullets }}" as="b" hint-placeholder-count="4">
+        <div style="{{ bulletRowStyle }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="{{ checkIconStyle }}"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p style="{{ bulletTextDarkStyle }}">{{ b }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="{{ closingLineDarkStyle }}">{{ content.promise.closing }}</p>
+  </div>
+</div>
+
+<div style="{{ sectionA }}">
+  <div style="{{ howContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numHow }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.howItWorks.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.howItWorks.title }}</h2>
+  </div>
+  <div style="{{ bannerWrapStyle }}">
+    <img src="./assets/how-it-works-illustration.jpeg" alt="Sua equipe de IA: roteirista, voz, vídeo e avatar trabalhando juntos" style="{{ bannerImgStyle }}" style-hover="{{ bannerImgHoverStyle }}"></img>
+  </div>
+  <div style="{{ howContainer }}">
+    <div style="{{ stepsListStyle }}">
+      <sc-for list="{{ content.howItWorks.steps }}" as="step" hint-placeholder-count="4">
+        <div style="{{ stepRowStyle }}">
+          <div style="{{ stepNumberStyle }}">{{ step.n }}</div>
+          <div style="{{ stepTextColStyle }}">
+            <p style="{{ stepTitleStyle }}">{{ step.title }}</p>
+            <p style="{{ stepBodyStyle }}">{{ step.body }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div style="{{ marqueeSectionStyle }}">
+  <div style="{{ marqueeTrackStyle }}">
+    <span style="{{ marqueeTextStyle }}">IA descomplicada&nbsp;&nbsp;·&nbsp;&nbsp;40+&nbsp;&nbsp;·&nbsp;&nbsp;sem tecniquês&nbsp;&nbsp;·&nbsp;&nbsp;no seu ritmo&nbsp;&nbsp;·&nbsp;&nbsp;IA descomplicada&nbsp;&nbsp;·&nbsp;&nbsp;40+&nbsp;&nbsp;·&nbsp;&nbsp;sem tecniquês&nbsp;&nbsp;·&nbsp;&nbsp;no seu ritmo&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+    <span style="{{ marqueeTextStyle }}" aria-hidden="true">IA descomplicada&nbsp;&nbsp;·&nbsp;&nbsp;40+&nbsp;&nbsp;·&nbsp;&nbsp;sem tecniquês&nbsp;&nbsp;·&nbsp;&nbsp;no seu ritmo&nbsp;&nbsp;·&nbsp;&nbsp;IA descomplicada&nbsp;&nbsp;·&nbsp;&nbsp;40+&nbsp;&nbsp;·&nbsp;&nbsp;sem tecniquês&nbsp;&nbsp;·&nbsp;&nbsp;no seu ritmo&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<div id="modulos" style="{{ sectionB }}">
+  <div style="{{ curriculumContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numCurriculum }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.curriculum.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.curriculum.title }}</h2>
+    <div style="{{ accordionListStyle }}">
+      <sc-for list="{{ curriculumModules }}" as="mod" hint-placeholder-count="4">
+        <div style="{{ accordionItemStyle }}">
+          <h3 style="{{ accordionHeadingStyle }}">
+            <button type="button" id="module-button-{{ $index }}" aria-expanded="{{ mod.expanded }}" aria-controls="module-panel-{{ $index }}" onClick="{{ mod.onToggle }}" style="{{ accordionButtonStyle }}" style-focus="{{ accordionButtonFocusStyle }}">
+              <span>{{ mod.title }}</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="{{ mod.chevronStyle }}"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+          </h3>
+          <div id="module-panel-{{ $index }}" role="region" aria-labelledby="module-button-{{ $index }}" style="{{ mod.panelStyle }}">
+            <p style="{{ accordionBodyTextStyle }}">{{ mod.body }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="{{ sealRowStyle }}">
+      <sc-for list="{{ content.curriculum.seal }}" as="item" hint-placeholder-count="3">
+        <span style="{{ sealItemStyle }}"><span style="{{ sealCheckStyle }}">✓</span> {{ item }}</span>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div style="{{ darkSectionStyle }}">
+  <div style="{{ darkGlowStyle }}"></div>
+  <div style="{{ darkContainer }}">
+    <span style="{{ numeralDarkStyle }}">{{ numAgents }}</span>
+    <div style="{{ eyebrowDarkStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.agents.eyebrow }}</div>
+    <h2 style="{{ titleDarkStyle }}">{{ content.agents.title }}</h2>
+    <p style="{{ bodyTextDarkStyle }}">{{ content.agents.intro }}</p>
+  </div>
+  <div style="{{ bannerWrapStyle }}">
+    <img src="./assets/agents-illustration.jpeg" alt="Ilustração: você no comando, os agentes de IA fazem o trabalho" style="{{ bannerImgStyle }}" style-hover="{{ bannerImgHoverStyle }}"></img>
+  </div>
+  <div style="{{ darkContainer }}">
+    <div style="{{ agentGridStyle }}">
+      <div style="{{ agentCardStyle }}" style-hover="{{ agentCardHoverStyle }}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="{{ agentIconStyle }}"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4"></circle><circle cx="12" cy="12" r="10"></circle></svg>
+        <h3 style="{{ agentCardTitleStyle }}">{{ content.agents.cards[0].title }}</h3>
+        <p style="{{ agentCardBodyStyle }}">{{ content.agents.cards[0].body }}</p>
+      </div>
+      <div style="{{ agentCardStyle }}" style-hover="{{ agentCardHoverStyle }}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="{{ agentIconStyle }}"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+        <h3 style="{{ agentCardTitleStyle }}">{{ content.agents.cards[1].title }}</h3>
+        <p style="{{ agentCardBodyStyle }}">{{ content.agents.cards[1].body }}</p>
+      </div>
+      <div style="{{ agentCardStyle }}" style-hover="{{ agentCardHoverStyle }}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="{{ agentIconStyle }}"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+        <h3 style="{{ agentCardTitleStyle }}">{{ content.agents.cards[2].title }}</h3>
+        <p style="{{ agentCardBodyStyle }}">{{ content.agents.cards[2].body }}</p>
+      </div>
+      <div style="{{ agentCardStyle }}" style-hover="{{ agentCardHoverStyle }}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="{{ agentIconStyle }}"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"></path><path d="m6.2 5.3 3.1 3.9"></path><path d="m12.4 3.4 3.1 4"></path><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path></svg>
+        <h3 style="{{ agentCardTitleStyle }}">{{ content.agents.cards[3].title }}</h3>
+        <p style="{{ agentCardBodyStyle }}">{{ content.agents.cards[3].body }}</p>
+      </div>
+    </div>
+    <p style="{{ agentsClosingStyle }}">{{ content.agents.closing }}</p>
+  </div>
+</div>
+
+<div style="{{ sectionA }}">
+  <div style="{{ audienceContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numAudience }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.audience.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.audience.title }}</h2>
+  </div>
+  <div style="{{ audienceBannerWrap }}">
+    <img src="./assets/audience-couple-shop.jpeg" alt="Empreendedores conferindo conteúdo no celular e notebook" style="{{ audienceImgStyle }}" style-hover="{{ bannerImgHoverStyle }}"></img>
+  </div>
+  <div style="{{ audienceContainer }}">
+    <div style="{{ audienceGridStyle }}">
+      <sc-for list="{{ content.audience.columns }}" as="col" hint-placeholder-count="2">
+        <div style="{{ audienceColStyle }}">
+          <h3 style="{{ audienceColTitleStyle }}">{{ col.title }}</h3>
+          <p style="{{ audienceColBodyStyle }}">{{ col.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="{{ closingLineStyle }}">{{ content.audience.closing }}</p>
+  </div>
+</div>
+
+<div style="{{ sectionB }}">
+  <div style="{{ objectionsContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numObjections }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.objections.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.objections.title }}</h2>
+    <div style="{{ objectionsListStyle }}">
+      <sc-for list="{{ content.objections.items }}" as="item" hint-placeholder-count="4">
+        <div style="{{ objectionItemStyle }}">
+          <p style="{{ objectionQStyle }}">{{ item.q }}</p>
+          <p style="{{ objectionAStyle }}">{{ item.a }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div style="{{ darkSectionStyle }}" ref="{{ offerSectionRef }}">
+  <div style="{{ darkGlowStyle }}"></div>
+  <div style="{{ offerContainer }}">
+    <span style="{{ numeralDarkStyle }}">{{ numOffer }}</span>
+    <div style="{{ eyebrowDarkStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.offer.eyebrow }}</div>
+    <h2 style="{{ titleDarkStyle }}">{{ content.offer.title }}</h2>
+    <div style="{{ offerListStyle }}">
+      <sc-for list="{{ content.offer.items }}" as="it" hint-placeholder-count="5">
+        <div style="{{ offerRowStyle }}">
+          <p style="{{ offerLabelStyle }}">{{ it.label }}</p>
+          <p style="{{ offerValueStyle }}">{{ it.value }}</p>
+        </div>
+      </sc-for>
+      <div style="{{ offerTotalRowStyle }}">
+        <p style="{{ offerTotalLabelStyle }}">{{ content.offer.totalLabel }}</p>
+        <p style="{{ offerTotalValueStyle }}">{{ content.offer.totalValue }}</p>
+      </div>
+    </div>
+    <div style="{{ offerExtrasStyle }}">
+      <sc-for list="{{ content.offer.extras }}" as="ex" hint-placeholder-count="2">
+        <p style="{{ offerExtraTextStyle }}">+ {{ ex }}</p>
+      </sc-for>
+    </div>
+    <div style="{{ offerPriceBlockStyle }}">
+      <p style="{{ offerTurnLabelStyle }}">{{ content.offer.turnLabel }}</p>
+      <p style="{{ offerOldPriceStyle }}">{{ content.offer.oldPrice }}</p>
+      <div style="{{ offerInstallmentRowStyle }}">
+        <span style="{{ offerSatelliteStyle }}">{{ content.offer.installmentTimes }}</span>
+        <span style="{{ offerSatelliteSmallStyle }}">{{ content.offer.installmentCurrency }}</span>
+        <span style="{{ offerInstallmentAmountStyle }}">{{ content.offer.installmentAmount }}</span>
+      </div>
+      <p style="{{ offerCashStyle }}">ou {{ content.offer.cashPrice }}</p>
+      <a href="{{ content.offer.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ ctaButtonStyle }}" style-hover="{{ ctaButtonHoverStyle }}" style-focus="{{ ctaButtonFocusStyle }}">{{ content.offer.ctaLabel }}</a>
+      <p style="{{ offerSecurityStyle }}">{{ content.offer.security }}</p>
+    </div>
+  </div>
+</div>
+
+<div id="garantia" style="{{ sectionA }}">
+  <div style="{{ guaranteeContainer }}">
+    <div style="{{ sideBySideGrid }}">
+      <div style="{{ photoFrameLandscapeStyle }}">
+        <img src="./assets/joao-casual-laptop.jpeg" alt="João Almeida comemorando um resultado no notebook" style="{{ photoImgStyle }}" style-hover="{{ photoImgHoverStyle }}"></img>
+      </div>
+      <div style="{{ textColStyle }}">
+        <span style="{{ numeralLightStyle }}">{{ numGuarantee }}</span>
+        <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.guarantee.eyebrow }}</div>
+        <h2 style="{{ titleStyle }}">{{ content.guarantee.title }}</h2>
+        <p style="{{ bodyTextStyle }}">{{ content.guarantee.body }}</p>
+        <p style="{{ signatureStyle }}">{{ content.guarantee.signature }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="faq" style="{{ sectionB }}">
+  <div style="{{ faqContainer }}">
+    <span style="{{ numeralLightStyle }}">{{ numFaq }}</span>
+    <div style="{{ eyebrowStyle }}"><span style="{{ eyebrowRuleStyle }}"></span>{{ content.faq.eyebrow }}</div>
+    <h2 style="{{ titleStyle }}">{{ content.faq.title }}</h2>
+    <div style="{{ accordionListStyle }}">
+      <sc-for list="{{ faqItems }}" as="item" hint-placeholder-count="5">
+        <div style="{{ accordionItemStyle }}">
+          <h3 style="{{ accordionHeadingStyle }}">
+            <button type="button" id="faq-button-{{ $index }}" aria-expanded="{{ item.expanded }}" aria-controls="faq-panel-{{ $index }}" onClick="{{ item.onToggle }}" style="{{ accordionButtonStyle }}" style-focus="{{ accordionButtonFocusStyle }}">
+              <span>{{ item.q }}</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="{{ item.chevronStyle }}"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+          </h3>
+          <div id="faq-panel-{{ $index }}" role="region" aria-labelledby="faq-button-{{ $index }}" style="{{ item.panelStyle }}">
+            <p style="{{ accordionBodyTextStyle }}">{{ item.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div style="{{ darkSectionStyle }}">
+  <div style="{{ darkGlowStyle }}"></div>
+  <div style="{{ finalContainer }}">
+    <div style="{{ finalProofWrapStyle }}">
+      <img src="./assets/final-video-proof.jpeg" alt="Comerciante mostrando o vídeo criado com IA no celular" style="{{ finalProofImgStyle }}" style-hover="{{ photoImgHoverStyle }}"></img>
+    </div>
+    <p style="{{ finalBodyStyle }}">{{ content.final.body1 }}</p>
+    <p style="{{ finalBodyStyle }}">{{ content.final.body2 }}</p>
+    <div style="{{ finalCtaWrapStyle }}">
+      <a href="{{ content.final.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ ctaButtonStyle }}" style-hover="{{ ctaButtonHoverStyle }}" style-focus="{{ ctaButtonFocusStyle }}">{{ content.final.ctaLabel }}</a>
+      <p style="{{ finalClosingStyle }}">{{ content.final.closing }}</p>
+    </div>
+  </div>
+</div>
+
+<footer style="{{ footerStyle }}">
+  <p style="{{ footerTextStyle }}">{{ content.footer.legal }}</p>
+  <a href="mailto:{{ content.footer.contactEmail }}" style="{{ footerLinkStyle }}" style-hover="{{ footerLinkHoverStyle }}">{{ content.footer.contactLabel }}</a>
+</footer>
+
+<sc-if value="{{ showStickyBar }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ stickyBarStyle }}">
+    <a href="{{ content.offer.ctaHref }}" target="_blank" rel="noopener noreferrer" style="{{ stickyButtonStyle }}">{{ content.offer.ctaLabel }}</a>
+  </div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const tokens = {
+  paper: '#FAF7EF',
+  paperAlt: '#EFE5D0',
+  ink: '#221E1A',
+  inkDim: '#6E6455',
+  rust: '#B84F27',
+  rustDark: '#8C3B1D',
+  gold: '#C79A48',
+  dark: '#1E1A15',
+  darkAlt: '#171310',
+  onDark: '#F5EEDF',
+  onDarkDim: '#C7BCA9',
+  hairlineLight: 'rgba(34,30,26,0.14)',
+  hairlineDark: 'rgba(245,238,223,0.16)',
+  displayFont: "'Newsreader', Georgia, serif",
+  bodyFont: "'Newsreader', Georgia, serif",
+  monoFont: "'JetBrains Mono', 'Courier New', monospace"
+};
+
+const content = {
+  hero: {
+    eyebrow: 'IA DESCOMPLICADA 40+',
+    headlinePart1: 'Você não está velho demais pra isso.',
+    headlinePart2: 'Você só nunca teve quem te ensinasse do seu jeito.',
+    subheadline: 'Aprenda a criar vídeos profissionais com Inteligência Artificial — do zero, no seu ritmo, sem tecniquês. Mesmo que você ache que "não leva jeito com tecnologia".',
+    ctaLabel: 'Quero criar meus vídeos com IA',
+    ctaSupport: 'Acesso imediato · Do computador ou do celular · Feito pra quem tem 40, 50, 60+',
+    ctaHref: 'https://pay.kiwify.com.br/hq961OM'
+  },
+  problem: {
+    eyebrow: '02 · A DOR',
+    title: 'Se você chegou até aqui, provavelmente já sentiu isso:',
+    bullets: [
+      'Você vê todo mundo postando vídeo com Inteligência Artificial e pensa: "como é que fazem isso?"',
+      'Uma partezinha de você acha que IA é "coisa de jovem", de quem entende de tecnologia — e que já passou da sua hora.',
+      'Você tem um negócio (ou quer prestar um serviço) e sabe que precisa de vídeo bom pra se destacar — mas pagar agência é caro e depender dos outros é ruim.',
+      'Toda vez que alguém te explica "é só usar tal programa", vem tanto termo em inglês que você desiste antes de tentar.'
+    ],
+    turn: 'Não é você que é devagar. É que ninguém te ensinou numa língua que você entende.'
+  },
+  transformation: {
+    eyebrow: '03 · A VIRADA',
+    paragraphs: [
+      'Eu sou o João Almeida. Sou jornalista há mais de 30 anos e, como você, não nasci na era do computador — aprendi tudo isso de gente grande, na marra, um passo de cada vez.',
+      'Hoje eu uso Inteligência Artificial todo santo dia no meu próprio negócio. Tenho até uma assistente de IA, a Iris, que me ajuda a criar conteúdo e responde minhas dúvidas técnicas. Ela não é ficção de curso — é ferramenta que eu uso de verdade, no meu trabalho, pra vender mais e trabalhar menos.',
+      'E foi aí que eu percebi uma coisa: o que separa quem faz um vídeo tosco de quem faz um vídeo que encanta não é a idade, nem uma ferramenta cara. É o método. Um jeito certo de conversar com a IA. E esse jeito dá pra ensinar — devagar, do zero, sem susto.',
+      'Foi isso que eu transformei no IAD 40+.'
+    ]
+  },
+  instructor: {
+    eyebrow: '03 · SOBRE O PROFESSOR',
+    title: 'Sobre o professor',
+    paragraphs: [
+      'João Almeida é jornalista com mais de 30 anos de experiência. Durante mais de três décadas trabalhou em todas as grandes emissoras de televisão do país.',
+      'Foi chefe de reportagem na TV Globo, editor-executivo na TV Record, editor-chefe na Rede Bandeirantes e produtor especial de programas de documentários no SBT.',
+      'Sempre ligado à área de conteúdo, João percebeu, com a chegada da IA, que a real necessidade sempre seria saber conversar com a Inteligência Artificial — pois somente isso poderia garantir os melhores resultados.',
+      'Assíduo leitor, leu mais de 150 livros, entre romances, autoajuda, livros técnicos e grandes clássicos da literatura universal. Desde a explosão da IA, em 2022, passou a estudar e aplicar todo o conhecimento sobre a nova realidade de comunicação.'
+    ],
+    stats: [
+      { n: 30, suffix: '+', l: 'Anos de carreira' },
+      { n: 150, suffix: '+', l: 'Livros lidos' },
+      { n: 4, suffix: '', l: 'Grandes emissoras' }
+    ],
+    networks: 'TV Globo · TV Record · Rede Bandeirantes · SBT',
+    signature: 'João Almeida · Jornalista · MTB 24.676'
+  },
+  promise: {
+    eyebrow: '04 · A PROMESSA',
+    title: 'No fim deste curso, você vai sair sabendo:',
+    bullets: [
+      'Criar um vídeo profissional com IA do zero ao pronto, com as suas próprias mãos.',
+      'Usar as ferramentas certas (todas com versão grátis pra você começar sem gastar nada).',
+      'Ter, na palma da mão, assistentes de IA prontos que fazem o trabalho difícil por você — você só diz o que quer, eles montam.',
+      'E, se quiser ir além: como usar isso pra valorizar o seu próprio negócio OU pra oferecer esse serviço a outros e ganhar com isso.'
+    ],
+    closing: 'Seja pra fazer o seu negócio brilhar ou pra virar uma nova fonte de renda — a habilidade é a mesma. E você vai dominá-la.'
+  },
+  howItWorks: {
+    eyebrow: '05 · COMO FUNCIONA',
+    title: 'Simples assim: você vê, você aprende, você faz.',
+    steps: [
+      { n: '1', title: 'Você começa destravando.', body: 'Antes de qualquer coisa, deixo tudo funcionando com você — passo a passo, devagar, sem pular etapa. Ninguém fica pra trás no "não consegui instalar".' },
+      { n: '2', title: 'Você tem sua primeira vitória rápida.', body: 'Logo no comecinho você já cria algo com IA e pensa: "caramba, EU fiz isso!". É essa a virada de chave.' },
+      { n: '3', title: 'Você aprende o método que encanta.', body: 'O segredo do "prompt" bem feito — o jeito de pedir pra IA que transforma um vídeo qualquer num vídeo profissional. E os assistentes prontos que fazem isso por você.' },
+      { n: '4', title: 'Você sai com seu vídeo pronto.', body: 'No fim, tem um vídeo na mão que você vai ter orgulho de mostrar. E o caminho pra fazer muitos mais.' }
+    ]
+  },
+  curriculum: {
+    eyebrow: '06 · OS MÓDULOS',
+    title: 'Tudo que você recebe no IAD 40+',
+    modules: [
+      { title: 'MÓDULO 1 — Boas-vindas e o mapa da jornada', body: 'Você entende onde vai chegar e conhece as ferramentas sem medo — inclusive o Claude, que muita gente teme e você vai dominar.' },
+      { title: 'MÓDULO 2 — Mão na massa: sua primeira vitória', body: 'Do avatar ao primeiro vídeo. Você cria seu personagem, seu roteiro e vê a mágica acontecer na tela.' },
+      { title: 'MÓDULO 3 — Voe mais alto: seu primeiro vídeo profissional', body: 'O segredo da consistência (o mesmo rosto, a mesma voz) e o vídeo profissional de verdade, do jeito que os grandes fazem.' },
+      { title: 'MÓDULO 4 — Partiu vender', body: 'Como encontrar cliente, fazer um vídeo-demonstração que gera conexão, e caminhos pra transformar isso em dinheiro — com os pés no chão, sem promessa mirabolante.' }
+    ],
+    seal: ['Do absoluto zero', 'Sem tecniquês', 'No seu ritmo, quantas vezes quiser']
+  },
+  agents: {
+    eyebrow: '07 · OS AGENTES',
+    title: 'Você não vai fazer sozinho. Você vai ter uma equipe de IA trabalhando por você.',
+    intro: 'Aqui está o que torna o IAD 40+ diferente de qualquer vídeo de YouTube: você não precisa decorar nada nem virar especialista. Eu te entrego assistentes de Inteligência Artificial já prontos — é só usar.',
+    cards: [
+      { title: 'Criador de Avatares', body: 'Monta o personagem perfeito pro seu vídeo.' },
+      { title: 'Consistência de Voz', body: 'Garante que a voz fique sempre igual, do jeito certo.' },
+      { title: 'Produtor de Roteiros', body: 'Escreve o roteiro do seu vídeo por você.' },
+      { title: 'Produtor de Cenas', body: 'Transforma sua ideia no comando certo pra IA gerar o vídeo.' }
+    ],
+    closing: 'Você diz o que quer. Eles fazem o trabalho pesado. Essa é a diferença entre "aprender IA" e simplesmente conseguir.'
+  },
+  audience: {
+    eyebrow: '08 · PRA QUEM É',
+    title: 'O IAD 40+ é pra você que:',
+    columns: [
+      { title: 'Tem um negócio próprio', body: 'Loja, serviço, consultório, MEI, oficina, o que for. Você quer conteúdo profissional pra atrair mais cliente — sem pagar fortuna pra agência e sem depender de ninguém.' },
+      { title: 'Quer uma nova fonte de renda', body: 'Você quer aprender uma habilidade nova e oferecer esse serviço de vídeo pra comércios e negócios da sua cidade. Um caminho novo, no seu tempo.' }
+    ],
+    closing: 'Não importa o motivo — o que você aprende aqui serve pros dois. E você aprende do zero.'
+  },
+  offer: {
+    eyebrow: '10 · A OFERTA',
+    title: 'Tudo que você leva hoje:',
+    items: [
+      { label: 'Curso completo IAD 40+ — do zero ao seu vídeo profissional pronto', value: 'R$ 697' },
+      { label: 'BÔNUS 1 · Agente Criador de Avatares Perfeitos', value: 'R$ 97' },
+      { label: 'BÔNUS 2 · Agente de Consistência de Voz', value: 'R$ 97' },
+      { label: 'BÔNUS 3 · Agente Produtor de Roteiros', value: 'R$ 97' },
+      { label: 'BÔNUS 4 · Agente Produtor de Cenas', value: 'R$ 97' }
+    ],
+    totalLabel: 'Investimento total:',
+    totalValue: 'R$ 1.085,00',
+    extras: [
+      '1 ano de acesso completo + atualizações — as ferramentas mudam toda semana, você fica sempre em dia',
+      'Espaço de suporte "Deu erro? Socorro" — pra nunca travar sozinho'
+    ],
+    turnLabel: 'Nessa oferta, tudo sai por:',
+    oldPrice: 'R$ 1.085,00',
+    installmentTimes: '12x',
+    installmentCurrency: 'R$',
+    installmentAmount: '30,72',
+    cashPrice: 'R$ 297 à vista',
+    ctaLabel: 'Quero começar agora',
+    ctaHref: 'https://pay.kiwify.com.br/hq961OM',
+    security: '🔒 Compra 100% segura · Acesso imediato · Garantia de 7 dias'
+  },
+  guarantee: {
+    eyebrow: '11 · A GARANTIA',
+    title: 'O risco é meu, não seu.',
+    body: 'Entra no curso, assiste as primeiras aulas, faz o teu primeiro vídeo. Se em 7 dias você sentir que não era pra você, me escreve e devolvo cada centavo. Sem drama, sem pergunta chata. Eu só quero você aqui se isso for te ajudar de verdade.',
+    signature: '— João Almeida / Jornalista · MTB 24.676'
+  },
+  objections: {
+    eyebrow: '09 · OBJEÇÕES',
+    title: '"Será que é pra mim mesmo?" — Vamos combinar uma coisa:',
+    items: [
+      { q: '"Eu não entendo nada de tecnologia."', a: 'Perfeito. O curso foi feito exatamente pra você. Cada passo é mostrado na tela, devagar. Se travar, tem um espaço só pra resolver os errinhos mais comuns.' },
+      { q: '"Será que na minha idade dá?"', a: 'Eu tenho mais de 30 anos de estrada e aprendi tudo isso depois dos 40. Se eu consigo, você consegue. Esse curso nasceu pra provar isso.' },
+      { q: '"Não vou ter que gastar com programas caros?"', a: 'Não pra começar. Você aprende usando as versões grátis das ferramentas. Só investe quando (e se) o dinheiro começar a entrar — é a lógica do pedreiro: você compra o material quando o serviço aparece.' },
+      { q: '"E se eu não gostar?"', a: 'Você tem 7 dias de garantia. Se não for pra você, é só pedir o dinheiro de volta. O risco é todo meu.' }
+    ]
+  },
+  faq: {
+    eyebrow: '12 · PERGUNTAS FREQUENTES',
+    title: 'Perguntas frequentes',
+    items: [
+      { q: 'Preciso ter um computador bom?', a: 'Não. Dá pra fazer boa parte no celular. Se tiver um computador simples, melhor ainda.' },
+      { q: 'Quanto tempo por dia eu preciso?', a: 'No seu ritmo. As aulas são curtas e diretas. Você assiste quando puder e quantas vezes quiser, durante 1 ano.' },
+      { q: 'As ferramentas são em inglês?', a: 'Algumas têm partes em inglês, mas eu te mostro exatamente onde clicar, passo a passo. Você não precisa saber inglês.' },
+      { q: 'Vou mesmo conseguir vender vídeos pros outros?', a: 'O curso te dá a habilidade e os caminhos. O quanto você vai longe depende de você — mas eu te mostro por onde começar, com honestidade, sem prometer milagre.' },
+      { q: 'Como recebo o acesso?', a: 'Na hora do pagamento, você já recebe o acesso no seu e-mail. É só entrar e começar.' }
+    ]
+  },
+  final: {
+    body1: 'Olha, a Inteligência Artificial não vai esperar. Todo dia mais gente aprende a usar — e a diferença não vai ser entre quem é novo e quem é mais velho. Vai ser entre quem começou e quem ficou olhando.',
+    body2: 'Você já provou que dá conta de coisas muito mais difíceis na vida. Isso aqui é só mais uma — e dessa vez, você tem quem te ensine do seu jeito.',
+    ctaLabel: 'Começar meu IAD 40+ agora — R$ 297',
+    ctaHref: 'https://pay.kiwify.com.br/hq961OM',
+    closing: 'Te vejo lá dentro. — João'
+  },
+  footer: {
+    legal: '© 2026 IAD 40+ · IA Descomplicada para 40+',
+    contactLabel: 'Suporte: contato@iad40mais.com.br',
+    contactEmail: 'contato@iad40mais.com.br'
+  }
+};
+
+const numOf = (s) => (s.match(/\d+/) || [''])[0];
+
+class Component extends DCLogic {
+  state = { reduced: false, openModule: 0, openFaq: -1, scrolledPastHero: false, offerVisible: false, isMobile: false, statProgress: 0, navOpen: false };
+  toggleNav = () => this.setState(s => ({ navOpen: !s.navOpen }));
+  closeNav = () => this.setState({ navOpen: false });
+  _statTriggered = false;
+
+  instructorRef = (el) => {
+    if (!el || this._statObserver) return;
+    this._statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this._statTriggered) {
+          this._statTriggered = true;
+          this.startStatCount();
+          this._statObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    this._statObserver.observe(el);
+  };
+
+  offerSectionRef = (el) => {
+    if (!el || this._stickyObserver) return;
+    this._stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => this.setState({ offerVisible: entry.isIntersecting }));
+    }, { threshold: 0 });
+    this._stickyObserver.observe(el);
+  };
+
+  componentDidMount() {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.setState({ reduced: mq.matches });
+
+    this._onScroll = () => this.setState({ scrolledPastHero: window.scrollY > 40 });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    this._mobileMq = window.matchMedia('(max-width: 767px)');
+    const updateMobile = () => this.setState({ isMobile: this._mobileMq.matches });
+    updateMobile();
+    this._mobileMq.addEventListener ? this._mobileMq.addEventListener('change', updateMobile) : this._mobileMq.addListener(updateMobile);
+    this._updateMobile = updateMobile;
+
+    this.buildHeadTags();
+  }
+
+  startStatCount() {
+    if (this.state.reduced) { this.setState({ statProgress: 1 }); return; }
+    const start = performance.now();
+    const dur = 1300;
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      this.setState({ statProgress: 1 - Math.pow(1 - p, 3) });
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  buildHeadTags() {
+    document.documentElement.lang = 'pt-BR';
+    document.title = 'IAD 40+ — Aprenda a Criar Vídeos Profissionais com IA, do Zero';
+    const setMeta = (attr, name, val) => {
+      let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    };
+    setMeta('name', 'description', 'Curso IAD 40+: aprenda a criar vídeos profissionais com Inteligência Artificial do zero, no seu ritmo — feito para quem tem 40, 50, 60+ anos.');
+    setMeta('name', 'theme-color', tokens.dark);
+    setMeta('property', 'og:title', 'IAD 40+ — IA Descomplicada para 40+');
+    setMeta('property', 'og:description', 'Aprenda a criar vídeos profissionais com Inteligência Artificial, do zero, sem tecniquês.');
+    setMeta('property', 'og:type', 'website');
+    setMeta('property', 'og:url', window.location.href);
+    const ogImageUrl = new URL('./assets/og-image.png', window.location.href).href;
+    setMeta('property', 'og:image', ogImageUrl);
+    setMeta('property', 'og:image:width', '1200');
+    setMeta('property', 'og:image:height', '630');
+    setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:title', 'IAD 40+ — IA Descomplicada para 40+');
+    setMeta('name', 'twitter:description', 'Aprenda a criar vídeos profissionais com Inteligência Artificial, do zero, sem tecniquês.');
+    setMeta('name', 'twitter:image', ogImageUrl);
+    if (!document.getElementById('faq-jsonld')) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'faq-jsonld';
+      script.text = JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'FAQPage',
+        mainEntity: content.faq.items.map(it => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } }))
+      });
+      document.head.appendChild(script);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._statObserver) this._statObserver.disconnect();
+    if (this._stickyObserver) this._stickyObserver.disconnect();
+    if (this._mobileMq && this._updateMobile) {
+      this._mobileMq.removeEventListener ? this._mobileMq.removeEventListener('change', this._updateMobile) : this._mobileMq.removeListener(this._updateMobile);
+    }
+  }
+
+  toggleModule(i) { this.setState(s => ({ openModule: s.openModule === i ? -1 : i })); }
+  toggleFaq(i) { this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })); }
+
+  renderVals() {
+    const reduced = this.state.reduced;
+    const isMobile = this.state.isMobile;
+
+    const numeralBase = { position: 'absolute', top: '-0.3em', right: 0, fontFamily: tokens.displayFont, fontWeight: 900, fontSize: '7rem', lineHeight: 1, pointerEvents: 'none', userSelect: 'none', zIndex: 0 };
+    const numeralLightStyle = { ...numeralBase, color: tokens.ink, opacity: 0.05 };
+    const numeralDarkStyle = { ...numeralBase, color: tokens.onDark, opacity: 0.06 };
+
+    const eyebrowStyle = { position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '12px', fontFamily: tokens.monoFont, fontWeight: 600, fontSize: '13px', letterSpacing: '0.14em', textTransform: 'uppercase', color: tokens.rust };
+    const eyebrowDarkStyle = { ...eyebrowStyle, color: tokens.gold };
+    const eyebrowRuleStyle = { display: 'inline-block', width: '26px', height: '2px', background: 'currentColor', flexShrink: 0 };
+    const titleStyle = { position: 'relative', zIndex: 1, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3.1rem)', lineHeight: 1.1, letterSpacing: '-0.01em', color: tokens.ink, margin: 0, maxWidth: '18ch' };
+    const titleDarkStyle = { ...titleStyle, color: tokens.onDark, maxWidth: '20ch' };
+    const bodyTextStyle = { position: 'relative', zIndex: 1, fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: '19px', lineHeight: 1.7, color: tokens.ink, maxWidth: '68ch', margin: 0 };
+    const bodyTextDarkStyle = { ...bodyTextStyle, color: tokens.onDarkDim, maxWidth: '70ch' };
+    const closingLineStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(1.5rem, 2.6vw, 2.1rem)', lineHeight: 1.25, color: tokens.ink, margin: '8px 0 0', maxWidth: '32ch' };
+    const closingLineDarkStyle = { ...closingLineStyle, color: tokens.onDark };
+    const bulletTextDarkStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.onDarkDim, maxWidth: '62ch', margin: 0 };
+
+    const containerBase = { position: 'relative', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'clamp(2rem, 4vw, 3.25rem)', width: '100%', boxSizing: 'border-box' };
+    const sectionA = { position: 'relative', background: tokens.paper, color: tokens.ink, padding: 'clamp(5rem, 10vw, 8rem) clamp(24px, 5vw, 56px)' };
+    const sectionB = { position: 'relative', background: tokens.paperAlt, color: tokens.ink, padding: 'clamp(5rem, 10vw, 8rem) clamp(24px, 5vw, 56px)' };
+    const darkSectionStyle = { position: 'relative', background: `linear-gradient(180deg, ${tokens.dark} 0%, ${tokens.darkAlt} 100%)`, color: tokens.onDark, padding: 'clamp(5rem, 10vw, 8rem) clamp(24px, 5vw, 56px)', overflow: 'hidden' };
+    const darkContainer = { maxWidth: '1000px', ...containerBase };
+    const darkGlowStyle = { position: 'absolute', left: '75%', top: '-15%', width: '620px', height: '620px', transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(184,79,39,0.20), transparent 70%)', pointerEvents: 'none', zIndex: 0 };
+
+    // ---- hero ----
+    const rootStyle = { position: 'relative', fontFamily: tokens.bodyFont };
+    const heroSectionStyle = isMobile
+      ? { position: 'relative', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: tokens.dark }
+      : { position: 'relative', minHeight: '92vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: tokens.dark };
+    const heroBgImgStyle = isMobile
+      ? { position: 'relative', order: 1, width: '100%', height: '38vh', minHeight: '260px', display: 'block', objectFit: 'cover', objectPosition: 'center 18%' }
+      : { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: '36% 18%' };
+    const heroScrimStyle = isMobile
+      ? { display: 'none' }
+      : { position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(23,19,16,0.87) 0%, rgba(23,19,16,0.80) 34%, rgba(23,19,16,0.46) 54%, rgba(23,19,16,0.14) 72%, rgba(23,19,16,0.02) 88%), linear-gradient(180deg, rgba(23,19,16,0.03) 0%, rgba(23,19,16,0.06) 45%, rgba(23,19,16,0.6) 100%)' };
+    const wordmarkStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '22px', color: tokens.onDark };
+    const wordmarkAccentStyle = { color: tokens.gold };
+
+    const scrolled = this.state.scrolledPastHero;
+    const navStyle = { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px clamp(20px,5vw,48px)', background: scrolled ? 'rgba(23,19,16,0.94)' : 'transparent', backdropFilter: scrolled ? 'blur(8px)' : 'none', boxShadow: scrolled ? '0 6px 20px rgba(0,0,0,0.25)' : 'none', transition: reduced ? 'none' : 'background 0.3s ease, box-shadow 0.3s ease', boxSizing: 'border-box' };
+    const navWordmarkLinkStyle = { textDecoration: 'none', display: 'inline-flex' };
+    const navLinksDesktopStyle = { display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: '28px' };
+    const navLinkStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: '14px', letterSpacing: '0.04em', color: tokens.onDark, textDecoration: 'none', opacity: 0.85, transition: reduced ? 'none' : 'opacity 0.2s ease, color 0.2s ease' };
+    const navLinkHoverStyle = { opacity: 1, color: tokens.gold };
+    const navCtaStyle = { padding: '10px 20px', background: tokens.rust, color: tokens.onDark, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '14px', borderRadius: '5px', textDecoration: 'none', whiteSpace: 'nowrap', transition: reduced ? 'none' : 'background 0.2s ease' };
+    const navCtaHoverStyle = { background: tokens.rustDark };
+    const navToggleStyle = { display: isMobile ? 'flex' : 'none', flexDirection: 'column', gap: '5px', background: 'transparent', border: 'none', padding: '8px', cursor: 'pointer', width: '40px', height: '40px', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' };
+    const navToggleBarStyle = { width: '22px', height: '2px', background: tokens.onDark, borderRadius: '2px' };
+    const navOpenAttr = this.state.navOpen ? 'true' : 'false';
+    const navMobilePanelStyle = { position: 'fixed', top: '64px', left: 0, right: 0, zIndex: 99, background: tokens.dark, padding: '16px clamp(20px,5vw,28px) 28px', display: 'flex', flexDirection: 'column', gap: '2px', boxShadow: '0 12px 30px rgba(0,0,0,0.35)', boxSizing: 'border-box' };
+    const navMobileLinkStyle = { padding: '14px 4px', fontFamily: tokens.displayFont, fontWeight: 600, fontSize: '18px', color: tokens.onDark, textDecoration: 'none', borderBottom: `1px solid ${tokens.hairlineDark}` };
+    const navMobileCtaStyle = { marginTop: '14px', textAlign: 'center', padding: '14px', background: tokens.rust, color: tokens.onDark, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '17px', borderRadius: '5px', textDecoration: 'none' };
+    const heroContentStyle = isMobile
+      ? { position: 'relative', order: 2, background: tokens.dark, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', padding: '28px 20px 40px', boxSizing: 'border-box', gap: '18px' }
+      : { position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', maxWidth: '620px', width: '100%', padding: 'clamp(96px,12vw,128px) clamp(24px,5vw,56px) clamp(48px,8vw,88px)', boxSizing: 'border-box', gap: '22px' };
+    const gcBarStyle = { display: 'inline-flex', alignItems: 'center', gap: '12px', fontFamily: tokens.monoFont, fontWeight: 600, fontSize: '13px', letterSpacing: '0.14em', textTransform: 'uppercase', color: tokens.gold };
+    const headlineStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(2.1rem, 5.2vw, 4.2rem)', lineHeight: 1.12, letterSpacing: '-0.01em', color: tokens.onDark, margin: 0, maxWidth: '18ch' };
+    const subheadStyle = { fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: 'clamp(1.1rem, 1.8vw, 1.3rem)', lineHeight: 1.6, color: tokens.onDarkDim, margin: 0, maxWidth: '54ch' };
+    const ctaWrapStyle = { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginTop: '6px' };
+    const ctaButtonStyle = { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: '58px', padding: '0 34px', background: `linear-gradient(135deg, ${tokens.rust}, ${tokens.rustDark})`, color: tokens.onDark, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '1.15rem', textDecoration: 'none', borderRadius: '5px', boxSizing: 'border-box', whiteSpace: 'nowrap', boxShadow: '0 10px 24px -10px rgba(140,59,29,0.55)', transition: reduced ? 'none' : 'transform 0.18s ease, box-shadow 0.18s ease' };
+    const ctaButtonHoverStyle = { transform: 'translateY(-2px)', boxShadow: '0 16px 34px -10px rgba(140,59,29,0.65)' };
+    const ctaButtonFocusStyle = { outline: `3px solid ${tokens.gold}`, outlineOffset: '3px' };
+    const ctaSupportStyle = { fontFamily: tokens.bodyFont, fontSize: '15px', color: tokens.onDarkDim, margin: 0 };
+
+    // ---- shared layout pieces ----
+    const bulletListStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1.2rem' };
+    const bulletRowStyle = { display: 'flex', alignItems: 'flex-start', gap: '14px' };
+    const bulletTextStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.ink, maxWidth: '62ch', margin: 0 };
+    const dashDotStyle = { width: '8px', height: '8px', borderRadius: '50%', background: tokens.rust, marginTop: '11px', flexShrink: 0 };
+    const checkIconStyle = { color: tokens.rust, marginTop: '4px', flexShrink: 0 };
+    const turnWrapStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '16px', marginTop: 'clamp(2rem, 4vw, 2.5rem)', paddingTop: 'clamp(2rem, 4vw, 2.5rem)', borderTop: `1px solid ${tokens.hairlineLight}` };
+    const turnTextStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(1.4rem, 2.6vw, 2rem)', lineHeight: 1.3, color: tokens.ink, maxWidth: '28ch', margin: 0 };
+
+    const problemContainer = { maxWidth: '720px', ...containerBase };
+    const promiseContainer = { maxWidth: '720px', ...containerBase };
+    const objectionsContainer = { maxWidth: '760px', ...containerBase };
+    const instructorContainer = { maxWidth: '980px', ...containerBase };
+    const curriculumContainer = { maxWidth: '780px', ...containerBase };
+    const faqContainer = { maxWidth: '780px', ...containerBase };
+    const howContainer = { maxWidth: '820px', ...containerBase };
+    const audienceContainer = { maxWidth: '920px', ...containerBase };
+    const transformationContainer = { maxWidth: '960px', ...containerBase };
+    const guaranteeContainer = { maxWidth: '960px', ...containerBase };
+    const offerContainer = { maxWidth: '720px', ...containerBase };
+    const finalContainer = { maxWidth: '680px', ...containerBase, alignItems: 'center', textAlign: 'center' };
+
+    const sideBySideGrid = { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'minmax(240px, 280px) 1fr', gap: 'clamp(28px, 4vw, 44px)', alignItems: 'center' };
+    const instructorGrid = { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr minmax(240px, 280px)', gap: 'clamp(28px, 4vw, 44px)', alignItems: 'center' };
+    const textColStyle = { position: 'relative', display: 'flex', flexDirection: 'column', gap: '1.25rem' };
+
+    const photoShadow = '0 26px 54px -20px rgba(34,30,26,0.4)';
+    const photoFramePortraitStyle = { position: 'relative', overflow: 'hidden', borderRadius: '14px', boxShadow: photoShadow, aspectRatio: isMobile ? '3 / 4' : '4 / 5' };
+    const photoFrameLandscapeStyle = { position: 'relative', overflow: 'hidden', borderRadius: '14px', boxShadow: photoShadow, aspectRatio: '5 / 4' };
+    const photoImgStyle = { width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%', display: 'block', transition: reduced ? 'none' : 'transform 0.5s ease' };
+    const photoImgHoverStyle = { transform: 'scale(1.06)' };
+
+    const bannerWrapStyle = { position: 'relative', maxWidth: '720px', margin: 'clamp(36px, 6vw, 56px) auto', width: '100%', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 30px 60px -26px rgba(0,0,0,0.5)' };
+    const audienceBannerWrap = { ...bannerWrapStyle, aspectRatio: isMobile ? '4 / 3' : '16 / 8' };
+    const bannerImgStyle = { width: '100%', display: 'block', transition: reduced ? 'none' : 'transform 0.5s ease' };
+    const audienceImgStyle = { width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 18%', display: 'block', transition: reduced ? 'none' : 'transform 0.5s ease' };
+    const bannerImgHoverStyle = { transform: 'scale(1.04)' };
+
+    // ---- instructor ----
+    const statsRowStyle = { display: 'flex', flexWrap: 'wrap', gap: '44px', marginTop: '8px' };
+    const p = this.state.statProgress;
+    const instructorStats = content.instructor.stats.map(s => ({ ...s, display: `${Math.round(s.n * p)}${s.suffix}` }));
+    const statBlockStyle = { display: 'flex', flexDirection: 'column', gap: '4px' };
+    const statNumberStyle = { fontFamily: tokens.displayFont, fontWeight: 900, fontSize: '48px', color: tokens.rust, lineHeight: 1 };
+    const statLabelStyle = { fontFamily: tokens.bodyFont, fontWeight: 500, fontSize: '17px', color: tokens.ink };
+    const networksStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: '15px', letterSpacing: '0.05em', color: tokens.inkDim, margin: 0 };
+    const signatureStyle = { fontFamily: tokens.bodyFont, fontSize: '17px', color: tokens.inkDim, margin: 0, borderTop: `1px solid ${tokens.hairlineLight}`, paddingTop: '16px' };
+
+    // ---- how it works ----
+    const stepsListStyle = { display: 'flex', flexDirection: 'column', gap: '40px' };
+    const stepRowStyle = { display: 'flex', gap: '24px', alignItems: 'flex-start' };
+    const stepNumberStyle = { fontFamily: tokens.monoFont, fontWeight: 600, fontSize: '30px', color: tokens.rust, lineHeight: 1, minWidth: '56px' };
+    const stepTextColStyle = { display: 'flex', flexDirection: 'column', gap: '6px' };
+    const stepTitleStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '22px', color: tokens.ink, margin: 0 };
+    const stepBodyStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.ink, margin: 0, maxWidth: '62ch' };
+
+    // ---- marquee (real scrolling carousel) ----
+    const marqueeSectionStyle = { position: 'relative', background: tokens.rust, padding: 'clamp(18px,3.5vh,26px) 0', overflow: 'hidden' };
+    const marqueeTrackStyle = { display: 'flex', width: 'max-content', ...(reduced ? {} : { animation: 'marqueeScroll 24s linear infinite' }) };
+    const marqueeTextStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(18px, 2.4vw, 28px)', color: tokens.onDark, whiteSpace: 'nowrap', paddingRight: '0.4em' };
+
+    // ---- accordion ----
+    const accordionListStyle = { display: 'flex', flexDirection: 'column', gap: '16px' };
+    const accordionItemStyle = { border: `1px solid ${tokens.hairlineLight}`, borderRadius: '8px', background: tokens.paper, overflow: 'hidden' };
+    const accordionHeadingStyle = { margin: 0 };
+    const accordionButtonStyle = { width: '100%', minHeight: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: '14px 20px', background: 'transparent', border: 'none', textAlign: 'left', fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '19px', color: tokens.ink, cursor: 'pointer', boxSizing: 'border-box' };
+    const accordionButtonFocusStyle = { outline: `3px solid ${tokens.rust}`, outlineOffset: '-2px' };
+    const accordionBodyTextStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.ink, margin: 0, maxWidth: '62ch' };
+    const sealRowStyle = { display: 'flex', flexWrap: 'wrap', gap: '10px 24px', marginTop: '4px' };
+    const sealItemStyle = { fontFamily: tokens.bodyFont, fontWeight: 600, fontSize: '17px', color: tokens.ink };
+    const sealCheckStyle = { color: tokens.rust, fontWeight: 800 };
+
+    const curriculumModules = content.curriculum.modules.map((mod, idx) => {
+      const open = this.state.openModule === idx;
+      return {
+        ...mod,
+        expanded: open ? 'true' : 'false',
+        panelStyle: { padding: open ? '0 20px 20px' : '0 20px', maxHeight: open ? '400px' : '0px', overflow: 'hidden', transition: reduced ? 'none' : 'max-height 0.35s ease, padding 0.35s ease' },
+        chevronStyle: { flexShrink: 0, color: tokens.inkDim, transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: reduced ? 'none' : 'transform 0.3s ease' },
+        onToggle: () => this.toggleModule(idx)
+      };
+    });
+    const faqItems = content.faq.items.map((item, idx) => {
+      const open = this.state.openFaq === idx;
+      return {
+        ...item,
+        expanded: open ? 'true' : 'false',
+        panelStyle: { padding: open ? '0 20px 20px' : '0 20px', maxHeight: open ? '400px' : '0px', overflow: 'hidden', transition: reduced ? 'none' : 'max-height 0.35s ease, padding 0.35s ease' },
+        chevronStyle: { flexShrink: 0, color: tokens.inkDim, transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: reduced ? 'none' : 'transform 0.3s ease' },
+        onToggle: () => this.toggleFaq(idx)
+      };
+    });
+
+    // ---- agents ----
+    const agentGridStyle = { position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' };
+    const agentCardStyle = { display: 'flex', flexDirection: 'column', gap: '16px', padding: '32px 28px', background: 'rgba(245,238,223,0.05)', border: `1px solid ${tokens.hairlineDark}`, borderRadius: '10px', transition: reduced ? 'none' : 'transform 0.25s ease, background 0.25s ease' };
+    const agentCardHoverStyle = { transform: 'translateY(-4px)', background: 'rgba(245,238,223,0.09)' };
+    const agentIconStyle = { color: tokens.gold };
+    const agentCardTitleStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '21px', color: tokens.onDark, margin: 0 };
+    const agentCardBodyStyle = { fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: '19px', lineHeight: 1.65, color: tokens.onDarkDim, margin: 0 };
+    const agentsClosingStyle = { position: 'relative', zIndex: 1, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: 'clamp(1.4rem, 2.6vw, 2rem)', lineHeight: 1.3, color: tokens.onDark, margin: '8px 0 0', maxWidth: '48ch' };
+
+    // ---- audience ----
+    const audienceGridStyle = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' };
+    const audienceColStyle = { display: 'flex', flexDirection: 'column', gap: '12px', padding: '32px', background: tokens.paperAlt, borderRadius: '10px' };
+    const audienceColTitleStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '22px', color: tokens.ink, margin: 0 };
+    const audienceColBodyStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.ink, margin: 0 };
+
+    // ---- objections ----
+    const objectionsListStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '28px' };
+    const objectionItemStyle = { display: 'flex', flexDirection: 'column', gap: '8px', paddingBottom: '24px', borderBottom: `1px solid ${tokens.hairlineLight}` };
+    const objectionQStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '21px', color: tokens.ink, margin: 0 };
+    const objectionAStyle = { fontFamily: tokens.bodyFont, fontSize: '19px', lineHeight: 1.7, color: tokens.inkDim, margin: 0, maxWidth: '64ch' };
+
+    // ---- offer ----
+    const offerListStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '4px' };
+    const offerRowStyle = { display: 'flex', justifyContent: 'space-between', gap: '20px', padding: '18px 0', borderBottom: `1px solid ${tokens.hairlineDark}` };
+    const offerLabelStyle = { fontFamily: tokens.bodyFont, fontSize: '18px', color: tokens.onDarkDim, margin: 0, maxWidth: '48ch' };
+    const offerValueStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: '18px', color: tokens.onDark, margin: 0, whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums lining-nums' };
+    const offerTotalRowStyle = { display: 'flex', justifyContent: 'space-between', gap: '20px', padding: '20px 0 4px', marginTop: '6px', borderTop: `2px solid ${tokens.rust}` };
+    const offerTotalLabelStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '21px', color: tokens.onDark, margin: 0 };
+    const offerTotalValueStyle = { fontFamily: tokens.monoFont, fontWeight: 600, fontSize: '22px', color: tokens.gold, margin: 0, fontVariantNumeric: 'tabular-nums lining-nums' };
+    const offerExtrasStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' };
+    const offerExtraTextStyle = { fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: '18px', lineHeight: 1.5, color: tokens.onDarkDim, margin: 0 };
+    const offerPriceBlockStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px', marginTop: '32px', paddingTop: '40px', borderTop: `1px solid ${tokens.hairlineDark}` };
+    const offerTurnLabelStyle = { fontFamily: tokens.bodyFont, fontWeight: 600, fontSize: '19px', color: tokens.onDarkDim, margin: 0 };
+    const offerOldPriceStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: '16px', color: tokens.onDarkDim, textDecoration: 'line-through', textDecorationThickness: '2px', margin: 0, fontVariantNumeric: 'tabular-nums lining-nums' };
+    const offerInstallmentRowStyle = { display: 'flex', alignItems: 'flex-start', gap: '6px', justifyContent: 'center' };
+    const offerSatelliteStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: 'clamp(15px, 1.8vw, 20px)', color: tokens.onDarkDim, lineHeight: 1, marginTop: '6px' };
+    const offerSatelliteSmallStyle = { fontFamily: tokens.monoFont, fontWeight: 500, fontSize: 'clamp(17px, 2.2vw, 24px)', color: tokens.onDarkDim, lineHeight: 1, marginTop: '4px' };
+    const offerInstallmentAmountStyle = { fontFamily: tokens.displayFont, fontWeight: 900, fontSize: 'clamp(3rem, 8vw, 4.6rem)', color: tokens.rust, lineHeight: 1, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums lining-nums' };
+    const offerCashStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '20px', color: tokens.onDark, margin: '0 0 8px' };
+    const offerSecurityStyle = { fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: '16px', color: tokens.onDarkDim, margin: '12px 0 0' };
+
+    // ---- final ----
+    const finalProofWrapStyle = { position: 'relative', width: 'clamp(200px, 22vw, 260px)', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 26px 55px -18px rgba(0,0,0,0.55)', zIndex: 1 };
+    const finalProofImgStyle = { width: '100%', aspectRatio: '5 / 4', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', transition: reduced ? 'none' : 'transform 0.5s ease' };
+    const finalBodyStyle = { position: 'relative', zIndex: 1, fontFamily: tokens.bodyFont, fontWeight: 400, fontSize: 'clamp(19px, 2vw, 22px)', lineHeight: 1.7, color: tokens.onDark, margin: 0, maxWidth: '56ch' };
+    const finalCtaWrapStyle = { position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', marginTop: '8px' };
+    const finalClosingStyle = { fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '19px', color: tokens.onDarkDim, margin: 0 };
+
+    // ---- footer / sticky ----
+    const footerStyle = { background: tokens.darkAlt, color: tokens.onDarkDim, padding: '32px clamp(24px,5vw,56px)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', boxSizing: 'border-box' };
+    const footerTextStyle = { margin: 0, fontFamily: tokens.bodyFont, fontSize: '16px', color: tokens.onDarkDim };
+    const footerLinkStyle = { fontFamily: tokens.bodyFont, fontSize: '16px', color: tokens.onDarkDim, textDecoration: 'underline' };
+    const footerLinkHoverStyle = { color: tokens.gold };
+    const showStickyBar = this.state.isMobile && this.state.scrolledPastHero && !this.state.offerVisible;
+    const stickyBarStyle = { position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 50, background: tokens.dark, padding: '12px 16px calc(12px + env(safe-area-inset-bottom))', boxShadow: '0 -4px 16px rgba(0,0,0,0.45)', display: 'flex', justifyContent: 'center', boxSizing: 'border-box' };
+    const stickyButtonStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '480px', minHeight: '48px', padding: '0 20px', background: tokens.rust, color: tokens.onDark, fontFamily: tokens.displayFont, fontWeight: 700, fontSize: '17px', textDecoration: 'none', borderRadius: '5px', boxSizing: 'border-box', whiteSpace: 'nowrap' };
+
+    return {
+      content, rootStyle,
+      numProblem: numOf(content.problem.eyebrow), numTransformation: numOf(content.transformation.eyebrow), numInstructor: numOf(content.instructor.eyebrow),
+      numPromise: numOf(content.promise.eyebrow), numHow: numOf(content.howItWorks.eyebrow), numCurriculum: numOf(content.curriculum.eyebrow),
+      numAgents: numOf(content.agents.eyebrow), numAudience: numOf(content.audience.eyebrow), numObjections: numOf(content.objections.eyebrow),
+      numOffer: numOf(content.offer.eyebrow), numGuarantee: numOf(content.guarantee.eyebrow), numFaq: numOf(content.faq.eyebrow),
+      numeralLightStyle, numeralDarkStyle,
+      heroSectionStyle, heroBgImgStyle, heroScrimStyle, wordmarkStyle, wordmarkAccentStyle,
+      navStyle, navWordmarkLinkStyle, navLinksDesktopStyle, navLinkStyle, navLinkHoverStyle, navCtaStyle, navCtaHoverStyle,
+      navToggleStyle, navToggleBarStyle, navOpenAttr, navOpen: this.state.navOpen, navMobilePanelStyle, navMobileLinkStyle, navMobileCtaStyle,
+      toggleNav: this.toggleNav, closeNav: this.closeNav,
+      heroContentStyle, gcBarStyle, headlineStyle, subheadStyle, ctaWrapStyle, ctaButtonStyle, ctaButtonHoverStyle, ctaButtonFocusStyle, ctaSupportStyle,
+      sectionA, sectionB, darkSectionStyle, darkContainer, darkGlowStyle,
+      eyebrowStyle, eyebrowDarkStyle, eyebrowRuleStyle, titleStyle, titleDarkStyle, bodyTextStyle, bodyTextDarkStyle, closingLineStyle, closingLineDarkStyle,
+      bulletListStyle, bulletRowStyle, bulletTextStyle, bulletTextDarkStyle, dashDotStyle, checkIconStyle, turnWrapStyle, turnTextStyle,
+      problemContainer, promiseContainer, objectionsContainer, instructorContainer, curriculumContainer, faqContainer, howContainer, audienceContainer, transformationContainer, guaranteeContainer, offerContainer, finalContainer,
+      sideBySideGrid, instructorGrid, textColStyle,
+      photoFramePortraitStyle, photoFrameLandscapeStyle, photoImgStyle, photoImgHoverStyle,
+      bannerWrapStyle, audienceBannerWrap, bannerImgStyle, audienceImgStyle, bannerImgHoverStyle,
+      statsRowStyle, instructorStats, statBlockStyle, statNumberStyle, statLabelStyle, networksStyle, signatureStyle, instructorRef: this.instructorRef,
+      stepsListStyle, stepRowStyle, stepNumberStyle, stepTextColStyle, stepTitleStyle, stepBodyStyle,
+      marqueeSectionStyle, marqueeTrackStyle, marqueeTextStyle,
+      accordionListStyle, accordionItemStyle, accordionHeadingStyle, accordionButtonStyle, accordionButtonFocusStyle, accordionBodyTextStyle, sealRowStyle, sealItemStyle, sealCheckStyle,
+      curriculumModules, faqItems,
+      agentGridStyle, agentCardStyle, agentCardHoverStyle, agentIconStyle, agentCardTitleStyle, agentCardBodyStyle, agentsClosingStyle,
+      audienceGridStyle, audienceColStyle, audienceColTitleStyle, audienceColBodyStyle,
+      objectionsListStyle, objectionItemStyle, objectionQStyle, objectionAStyle,
+      offerListStyle, offerRowStyle, offerLabelStyle, offerValueStyle, offerTotalRowStyle, offerTotalLabelStyle, offerTotalValueStyle,
+      offerExtrasStyle, offerExtraTextStyle, offerPriceBlockStyle, offerTurnLabelStyle, offerOldPriceStyle, offerInstallmentRowStyle, offerSatelliteStyle, offerSatelliteSmallStyle, offerInstallmentAmountStyle, offerCashStyle, offerSecurityStyle,
+      offerSectionRef: this.offerSectionRef,
+      finalProofWrapStyle, finalProofImgStyle, finalBodyStyle, finalCtaWrapStyle, finalClosingStyle,
+      footerStyle, footerTextStyle, footerLinkStyle, footerLinkHoverStyle,
+      showStickyBar, stickyBarStyle, stickyButtonStyle
+    };
+  }
+}
+
+</script>
+</body>
+</html>
