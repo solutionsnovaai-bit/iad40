@@ -17,8 +17,26 @@
 <meta name="twitter:description" content="Aprenda a criar vídeos profissionais com Inteligência Artificial, do zero, sem tecniquês.">
 <meta name="twitter:image" content="./assets/og-image.png">
 <script src="./support.js"></script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27660651970212390');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=27660651970212390&ev=PageView&noscript=1"
+/></noscript>
 <x-dc>
 
 <helmet>
@@ -633,6 +651,22 @@ class Component extends DCLogic {
     this._mobileMq.addEventListener ? this._mobileMq.addEventListener('change', updateMobile) : this._mobileMq.addListener(updateMobile);
     this._updateMobile = updateMobile;
 
+    // --- Meta Pixel: InitiateCheckout em qualquer CTA do Kiwify ---
+    this._onCtaClick = (e) => {
+      const link = e.target && e.target.closest
+        ? e.target.closest('a[href*="pay.kiwify.com.br"]')
+        : null;
+      if (link && typeof window.fbq === 'function') {
+        window.fbq('track', 'InitiateCheckout', {
+          content_name: 'IAD 40+',
+          content_category: 'Curso',
+          value: 297.00,
+          currency: 'BRL'
+        });
+      }
+    };
+    document.addEventListener('click', this._onCtaClick, true);
+
     this.buildHeadTags();
   }
 
@@ -684,6 +718,7 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this._onScroll);
+    if (this._onCtaClick) document.removeEventListener('click', this._onCtaClick, true);
     if (this._statObserver) this._statObserver.disconnect();
     if (this._stickyObserver) this._stickyObserver.disconnect();
     if (this._mobileMq && this._updateMobile) {
